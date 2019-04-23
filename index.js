@@ -136,7 +136,8 @@ PNGImage._readImageFromUrl = function (url, fn) {
 
 	var stream, req;
 
-	request.head(url, function (err, res) {
+	// NOTE: presigned s3 URLs return application/xml content-type during HEAD request type, so use GET instead
+	request.get(url, function (err, res) {
 
 		var contentType = (res.headers['content-type'] || '').toLowerCase();
 
